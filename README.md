@@ -44,7 +44,7 @@ Use your new class
     akMailer::$transport_type = 'smtp';
     akMailer::$mailer   = 'swift_mailer';
     akMailer::$log      = true;              # allow logging events
-    akMailer::$test     = false;             # Set this to false and no email will be send. It would be only logged.
+    akMailer::$test     = false;             # Set this to true and no email will be send. It would be only logged.
     akMailer::$templates_path = realpath( dirname(__FILE__) ). "/templates/";
     try {
       $mailer = new MyMailer();
