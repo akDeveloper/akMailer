@@ -60,7 +60,7 @@ class akMailer {
   protected $instance;
 
   /**
-   * sender email address
+   * sender email address. accepts same syntax as $from variable.
    */
   protected $from;
 
@@ -91,11 +91,6 @@ class akMailer {
   protected $subject;
 
   /**
-   * message body of email
-   */
-  protected $message;
-
-  /**
    * an array handling all variables we can use in email template message
    */
   protected $body = array();
@@ -103,7 +98,7 @@ class akMailer {
   /**
    * template filename we use to send email(s)
    */
-  protected $template_file;
+  private   $template_file;
 
   /**
    * email content type
