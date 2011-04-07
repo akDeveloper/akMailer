@@ -1,0 +1,7 @@
+/mailers/phpmailer/*
+!/mailers/phpmailer/.phpmailer_files_here
+/mailers/swiftmailer/*
+!/mailers/swiftmailer/.swiftmailer_files_here
+/mailers/zendmailer/*
+!/mailers/zendmailer/.zendmailer_files_here
+/log/*
