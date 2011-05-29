@@ -32,6 +32,7 @@ Create the class of your mailer by extending the class akMailer.
     }
 
 Use your new class
+    
     # example.php
     require_once '../lib/init.php';
     require_once 'MyMailer.php';
@@ -69,6 +70,7 @@ Use your new class
     }
 
 Define your template
+    
     # example_email.text.html.php
     <h2>Dear <?php echo $title ?> <?php echo $name ?></h2>
     <p><img src="<?php echo $embedded ?>" alt="title"></p>
