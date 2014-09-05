@@ -10,7 +10,7 @@ You can use [swiftmailer](http://www.swiftmailer.org/), [phpmailer](http://http:
 
 ## Example Usage
 Create the class of your mailer by extending the class akMailer.
-
+```php
     # MyMailer.php
     class MyMailer extends akMailer {
 
@@ -30,9 +30,9 @@ Create the class of your mailer by extending the class akMailer.
         );
       }
     }
-
+```
 Use your new class
-    
+```php    
     # example.php
     require_once '../lib/init.php';
     require_once 'MyMailer.php';
@@ -68,12 +68,13 @@ Use your new class
     } catch (akMailerException $e) {
       echo $e->getMessage();
     }
-
+```
 Define your template
-    
+```php    
     # example_email.text.html.php
     <h2>Dear <?php echo $title ?> <?php echo $name ?></h2>
     <p><img src="<?php echo $embedded ?>" alt="title"></p>
     <p><em>Inline attachment</em>
     <p>This is a demo example from akMailer</p>
     <p>Thank you.</p>
+```    
