@@ -1,10 +1,7 @@
-<?php 
-set_include_path(AK_MAILERS . 'zendmailer/library'  . PATH_SEPARATOR . get_include_path());
-require_once 'Zend/Mail.php';
-require_once 'Zend/Mail/Transport/Smtp.php';
+<?php
 
 class akZendMailerAdapter extends akMailerAdapter {
-  
+
   protected $message;
   protected $logger;
 
@@ -75,14 +72,14 @@ class akZendMailerAdapter extends akMailerAdapter {
     $this->mailer->setSubject($subject);
   }
 
-  public function body($body, $content_type) { 
+  public function body($body, $content_type) {
     if ("text/plain" === $content_type) {
       $this->mailer->setBodyText = $body;
     } elseif ("text/html" === $content_type) {
       $this->mailer->setBodyHtml($body);
     }
   }
-  
+
   public function send() {
     $this->mailer->send($this->transport);
   }

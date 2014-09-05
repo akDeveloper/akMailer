@@ -1,9 +1,7 @@
-<?php 
-
-require_once AK_MAILERS . 'swiftmailer/swift_required.php';
+<?php
 
 class akSwiftMailerAdapter extends akMailerAdapter {
-  
+
   protected $message;
   protected $logger;
 
@@ -19,7 +17,7 @@ class akSwiftMailerAdapter extends akMailerAdapter {
       $this->transport = Swift_MailTransport::newInstance();
       break;
     case 'sendmail':
-      $this->transport = Swift_SendmailTransport::newInstance();     
+      $this->transport = Swift_SendmailTransport::newInstance();
       break;
     }
 
@@ -59,12 +57,12 @@ class akSwiftMailerAdapter extends akMailerAdapter {
     $this->message->setSubject($subject);
   }
 
-  public function body($body, $content_type) { 
+  public function body($body, $content_type) {
     $this->message->setBody($body, $content_type);
   }
-  
+
   public function send() {
-    try {  
+    try {
       return $this->mailer->send($this->message);
     } catch (SwiftException $e) {
       throw new akMailerException($e->getMessage());
@@ -72,7 +70,7 @@ class akSwiftMailerAdapter extends akMailerAdapter {
   }
 
   public function addCc($email, $name) {
-    $this->message->addCc($email, $name); 
+    $this->message->addCc($email, $name);
   }
 
   public function addBcc($email, $name) {

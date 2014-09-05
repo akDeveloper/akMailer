@@ -1,0 +1,25 @@
+{
+    "name": "mail/akmailer",
+    "description": "",
+    "keywords": [""],
+    "type": "",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andreas Kollaros",
+            "email": "andreaskollaros@ymail.com"
+        },
+        {
+            "name": "Dimitris Giannakakis",
+            "email": "dimitris@tripiko.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3",
+        "swiftmailer/swiftmailer": "5.2.*"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "files": ["lib/init.php"]
+    }
+}

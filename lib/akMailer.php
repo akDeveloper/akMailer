@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class akMailer {
 
@@ -12,7 +12,7 @@ class akMailer {
    * transport type of mailer. could be 'smtp', 'mail' or 'sendmail'
    */
   public static $transport_type;
- 
+
   /**
    * set SMTP server
    */
@@ -44,7 +44,7 @@ class akMailer {
   public static $log = false;
 
   /**
-   * if true then akMailer will not actuall send any emails but will print 
+   * if true then akMailer will not actuall send any emails but will print
    * content to log file
    */
   public static $test = false;
@@ -65,15 +65,15 @@ class akMailer {
   protected $from;
 
   /**
-   * recipient(s) email address. could be an array of email addresses in format 
+   * recipient(s) email address. could be an array of email addresses in format
    *
    * array(
    *  'name@example.com' => 'name',
    *  'anothername@example.com' => 'another name'
    * )
-   * 
+   *
    * or just a string of email
-   * 
+   *
    * 'name@example.com'
    *
    * this syntax also applies to $cc and $bcc variables
@@ -110,10 +110,10 @@ class akMailer {
   /**
    * handles the status of send email
    */
-  private $_status;
+  private $status;
 
   public function __construct(){
-    if (self::$log) Logger::start_logging();
+    //if (self::$log) Logger::start_logging();
     $this->_createMailerInstance();
   }
 
@@ -140,7 +140,7 @@ class akMailer {
       $attach = array($filepath => $filename);
     }
     $this->_attachments = array_merge($this->_attachments, $attach);
-    if (self::$log) Logger::log("Added attachment file {$filepath}");
+    //if (self::$log) Logger::log("Added attachment file {$filepath}");
   }
 
   /**
@@ -149,18 +149,18 @@ class akMailer {
    * @param string $filepath
    */
   public function setEmbeddedAttachment($filepath) {
-    if (!file_exists($filepath) ) throw new akMailerException("{$filepath} does not exist!");    
-    if (self::$log) Logger::log("Added attachment file {$filepath}");
+    if (!file_exists($filepath) ) throw new akMailerException("{$filepath} does not exist!");
+    //if (self::$log) Logger::log("Added attachment file {$filepath}");
     return $this->instance->embed($filepath);
   }
 
   /**
-   * 
+   *
    */
   public function isSuccess() {
     return true == $this->status;
   }
-  
+
 private function deliver() {
     $this->_composeEmail();
     if ( false === self::$test )  {
@@ -170,40 +170,40 @@ private function deliver() {
         throw new akMailerException($e->getMessage());
       }
     } else {
-      Logger::log($this->instance->log());
+      //Logger::log($this->instance->log());
       return true;
     }
     if (true === self::$log && false === self::$test){
-      Logger::log($this->instance->log());
+      //Logger::log($this->instance->log());
     }
-      
+
   }
 
   private function _createMailerInstance(){
     $options = array();
-    
+
     if ('smtp' === self::$transport_type) {
       $options['host']       = self::$host;
       $options['port']       = self::$port;
       $options['username']   = self::$username;
       $options['password']   = self::$password;
       $options['encryption'] = self::$encryption;
-    } 
+    }
 
     $options['transport_type'] = self::$transport_type;
     $options['log']            = self::$log;
-    
+
     if ( empty(self::$mailer) ) throw new akMailerException("You must set a mailer!");
 
     $mailer_class = "ak" . $this->_camelize(self::$mailer) . "Adapter";
     $adapter_path = dirname(__FILE__) . '/adapters/' . $mailer_class . ".php";
-    
+
     if ( file_exists( $adapter_path ) ) {
       require_once $adapter_path;
     } else {
       throw new akMailerException("Could not find {$mailer_class} adapter!");
     }
-    if (self::$log) Logger::log("Using {$mailer_class}");
+    //if (self::$log) Logger::log("Using {$mailer_class}");
     $this->instance = new $mailer_class($options);
   }
 
@@ -221,7 +221,7 @@ private function deliver() {
     # set recipient(s) info
     if ( "" != $this->bcc )
       $this->_passVariablesToInstance('addBcc',$this->bcc);
-    
+
     # set message subject
     $this->instance->subject($this->subject);
 
@@ -229,10 +229,10 @@ private function deliver() {
     $body = $this->_getTemplate();
     $this->instance->body($body, $this->_content_type);
 
-    # set attachments 
+    # set attachments
     $this->_passVariablesToInstance('addAttachment',$this->_attachments);
   }
-   
+
   private function _passVariablesToInstance($function, $variables) {
     if (is_array($variables)) {
       foreach( $variables as $key=>$value) {
@@ -257,10 +257,10 @@ private function deliver() {
       $this->_content_type = "text/html";
     } elseif ( file_exists( $plain_file ) ) {
       $file = $plain_file;
-      $this->_content_type = "text/plain";     
+      $this->_content_type = "text/plain";
     } elseif ( file_exists( $default_file ) ) {
       $file = $defualt_file;
-      $this->_content_type = "text/html";     
+      $this->_content_type = "text/html";
     } else {
       throw new akMailerException ("Missing template file '{$this->template_file}.php'");
     }
@@ -275,7 +275,7 @@ private function deliver() {
     ob_implicit_flush(0);
     try {
       eval("?>".file_get_contents($file));
-      $body = ob_get_contents();   
+      $body = ob_get_contents();
     } catch (Exception $e) {
       ob_end_clean();
       throw $e;

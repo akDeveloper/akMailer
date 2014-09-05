@@ -5,3 +5,5 @@
 /mailers/zendmailer/*
 !/mailers/zendmailer/.zendmailer_files_here
 /log/*
+/vendor/*
+composer.lock

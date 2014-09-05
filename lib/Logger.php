@@ -11,18 +11,19 @@ class Logger {
 
   public static $start_time;
   public static $log_path;
-  
+
   private static $handler;
 
-  static function &getHandler(){
+  static function getHandler(){
     if (!self::$handler){
       register_shutdown_function(array('Logger','end_logging'));
-      
+
       if ( null === self::$log_path )
         self::$log_path = realpath(dirname(__FILE__)) . "/../log/ak_mailer.log";
 
-      if ( !is_writable(self::$log_path) ) return false;
-      
+      $a = null;
+      if ( !is_writable(self::$log_path) ) return $a;
+
       self::$handler = fopen(self::$log_path, 'a');
       return self::$handler;
     }
@@ -41,7 +42,7 @@ class Logger {
   }
 
   static public function log($string){
-    $fp = &self::getHandler();
+    $fp = self::getHandler();
     if ($fp) fwrite($fp, $string."\n");
   }
 

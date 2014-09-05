@@ -1,5 +1,4 @@
-<?php 
-require_once AK_MAILERS . 'phpmailer/class.phpmailer.php';
+<?php
 
 class akPhpMailerAdapter extends akMailerAdapter{
 
@@ -21,7 +20,7 @@ class akPhpMailerAdapter extends akMailerAdapter{
       break;
     case 'sendmail':
       $this->mailer->IsSendmail();
-      break;   
+      break;
     }
   }
 
@@ -31,7 +30,7 @@ class akPhpMailerAdapter extends akMailerAdapter{
   public function setHeader($name, $value) {
     $this->mailer->addCustomHeader("{$name}:{$value}");
   }
-  
+
   public function addAttachment($filepath, $filename) {
     $this->mailer->AddAttachment($filepath, $filename);
   }
@@ -54,16 +53,16 @@ class akPhpMailerAdapter extends akMailerAdapter{
     $this->mailer->Subject = $subject;
   }
 
-  public function body($body, $content_type) { 
+  public function body($body, $content_type) {
     $this->mailer->MsgHTML($body);
   }
-  
+
   public function send() {
     return $this->mailer->Send();
   }
 
   public function addCc($email, $name) {
-    $this->mailer->AddCC($email, $name); 
+    $this->mailer->AddCC($email, $name);
   }
 
   public function addBcc($email, $name) {
@@ -73,6 +72,6 @@ class akPhpMailerAdapter extends akMailerAdapter{
   public function log() {
     return $this->mailer->ErrorInfo;
   }
- 
+
 }
 ?>
