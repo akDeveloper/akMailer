@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": ">=5.3",
-        "swiftmailer/swiftmailer": "5.2.*"
+        "swiftmailer/swiftmailer": "@stable"
     },
     "minimum-stability": "dev",
     "autoload": {
