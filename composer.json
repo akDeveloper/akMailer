@@ -1,8 +1,6 @@
 {
     "name": "mail/akmailer",
-    "description": "",
-    "keywords": [""],
-    "type": "",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -21,5 +19,10 @@
     "minimum-stability": "dev",
     "autoload": {
         "files": ["lib/init.php"]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "master"
+        }
     }
 }
