@@ -19,10 +19,5 @@
     "minimum-stability": "dev",
     "autoload": {
         "files": ["lib/init.php"]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "master"
-        }
     }
 }
